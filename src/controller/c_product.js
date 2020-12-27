@@ -201,6 +201,11 @@ module.exports = {
         category_id,
         product_name,
         product_price,
+        product_stock,
+        product_description,
+        product_order_delivery,
+        product_dine_in,
+        product_take_away,
         product_status
       } = req.body
 
@@ -208,6 +213,11 @@ module.exports = {
         category_id,
         product_name,
         product_price,
+        product_stock,
+        product_description,
+        product_order_delivery,
+        product_dine_in,
+        product_take_away,
         product_created_at: new Date(),
         product_status
       }
