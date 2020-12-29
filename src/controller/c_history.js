@@ -27,15 +27,15 @@ module.exports = {
         history_invoices,
         history_payment_method,
         history_subtotal,
-        // user_id,
-        status
+        user_id,
+        history_status
       } = req.body
       if (
         history_invoices == null ||
         history_payment_method == null ||
         history_subtotal == null ||
-        // user_id == null ||
-        status == null
+        user_id == null ||
+        history_status == null
       ) {
         console.log('All data must be filled in')
       } else {
@@ -44,9 +44,9 @@ module.exports = {
           history_invoices,
           history_payment_method,
           history_subtotal,
-          //   user_id,
+          user_id,
           history_created_at: new Date(),
-          status
+          history_status
         }
         const result = await postHistoryModel(setData)
         return helper.response(res, 200, 'Success Post History', result)
@@ -59,14 +59,21 @@ module.exports = {
     try {
       console.log(req.body)
       const [
-        { product_id, history_detail_qty, history_detail_total, history_id }
+        {
+          history_detail_id,
+          product_id,
+          history_detail_qty,
+          history_detail_total,
+          history_id
+        }
       ] = req.body
       const setData = {
+        history_detail_id,
         product_id,
         history_detail_qty,
         history_detail_total,
-        history_id
-        // history_created_at: new Date()
+        history_id,
+        history_created_at: new Date()
       }
       const result = await postDetailhistoryModel(setData)
       return helper.response(res, 200, 'Success Post Detail History', result)

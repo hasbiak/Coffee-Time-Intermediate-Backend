@@ -34,7 +34,7 @@ module.exports = {
   postDetailhistoryModel: (setData) => {
     return new Promise((resolve, reject) => {
       connection.query(
-        'INSERT INTO detailhistory SET ?',
+        'INSERT INTO history_detail SET ?',
         setData,
         (error, result) => {
           if (!error) {
