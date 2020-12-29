@@ -5,7 +5,7 @@ const {
   postCoupon,
   patchCoupon,
   deleteCoupon
-} = require('../controller/c_Coupon')
+} = require('../controller/c_coupon')
 
 router.get('/', getCoupon)
 router.get('/:id', getCouponById)
