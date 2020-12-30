@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Des 2020 pada 10.31
+-- Waktu pembuatan: 30 Des 2020 pada 20.56
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.2.32
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `express_o`
+-- Database: `coffetime`
 --
 
 -- --------------------------------------------------------
@@ -54,6 +54,7 @@ INSERT INTO `category` (`category_id`, `category_name`, `category_created_at`, `
 CREATE TABLE `coupon` (
   `coupon_id` int(11) NOT NULL,
   `coupon_name` varchar(100) NOT NULL,
+  `coupon_image` varchar(50) NOT NULL,
   `coupon_discount` int(11) NOT NULL,
   `minimum_order` int(11) NOT NULL,
   `coupon_description` varchar(255) NOT NULL,
@@ -67,10 +68,11 @@ CREATE TABLE `coupon` (
 -- Dumping data untuk tabel `coupon`
 --
 
-INSERT INTO `coupon` (`coupon_id`, `coupon_name`, `coupon_discount`, `minimum_order`, `coupon_description`, `coupon_valid`, `coupon_created_at`, `coupon_updated_at`, `coupon_status`) VALUES
-(1, 'CPN0001', 100, 0, 'Deskripsi coupon', 0, '2020-12-14 11:33:41', '0000-00-00 00:00:00', 1),
-(3, 'CPN0003', 100, 0, 'Hello', 0, '2020-12-29 06:36:11', '2020-12-29 06:33:19', 1),
-(4, 'CPN0004', 100, 0, 'Hello', 0, '2020-12-29 06:36:20', '2020-12-29 06:33:29', 1);
+INSERT INTO `coupon` (`coupon_id`, `coupon_name`, `coupon_image`, `coupon_discount`, `minimum_order`, `coupon_description`, `coupon_valid`, `coupon_created_at`, `coupon_updated_at`, `coupon_status`) VALUES
+(1, 'CPN0001', '', 100, 0, 'Deskripsi coupon', 0, '2020-12-14 11:33:41', '0000-00-00 00:00:00', 1),
+(3, 'CPN0003', '', 100, 0, 'Hello', 0, '2020-12-29 06:36:11', '2020-12-29 06:33:19', 1),
+(4, 'CPN0004', '', 100, 0, 'Hello', 0, '2020-12-29 06:36:20', '2020-12-29 06:33:29', 1),
+(5, 'CUST0006', '', 100, 0, 'Cek', 0, '2020-12-30 13:52:56', '2020-12-30 06:52:56', 1);
 
 -- --------------------------------------------------------
 
@@ -94,8 +96,11 @@ CREATE TABLE `history` (
 
 INSERT INTO `history` (`history_id`, `history_invoices`, `history_payment_method`, `history_status`, `history_subtotal`, `user_id`, `history_created_at`) VALUES
 (1, 'CUST0001', 'Cash', 1, 2000, 1, '0000-00-00 00:00:00'),
-(2, 'CUST0002', 'Cash', 1, 50000, 1, '2020-12-29 06:46:26'),
-(3, 'CUST0003', 'Cash', 1, 50000, 1, '2020-12-29 06:53:16');
+(3, 'CUST0003', 'Cash', 1, 50000, 1, '2020-12-29 06:53:16'),
+(4, 'CUST0004', 'Cash', 1, 50000, 1, '2020-12-30 00:52:26'),
+(5, 'CUST0005', 'Cash', 1, 50000, 1, '2020-12-30 06:35:44'),
+(6, 'CUST0005', 'Cash', 1, 50000, 1, '2020-12-30 06:50:58'),
+(7, 'CUST0006', 'Cash', 1, 50000, 1, '2020-12-30 08:06:04');
 
 -- --------------------------------------------------------
 
@@ -118,7 +123,12 @@ CREATE TABLE `history_detail` (
 --
 
 INSERT INTO `history_detail` (`history_detail_id`, `product_id`, `history_detail_qty`, `size`, `history_detail_total`, `history_id`, `history_created_at`) VALUES
-(1, 22, 2, 'Small', 2000, 1, '2020-12-29 13:51:31');
+(1, 22, 2, 'Small', 2000, 1, '2020-12-29 13:51:31'),
+(2, 2, 2, '', 40000, 3, '2020-12-30 07:52:42'),
+(3, 2, 2, 'Large', 40000, 3, '2020-12-30 07:54:47'),
+(4, 1, 2, 'Large', 50000, 2, '2020-12-30 07:55:39'),
+(5, 1, 2, 'Large', 50000, 2, '2020-12-30 13:35:52'),
+(6, 1, 2, 'Large', 50000, 2, '2020-12-30 15:06:20');
 
 -- --------------------------------------------------------
 
@@ -161,24 +171,26 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `category_id`, `product_name`, `product_price`, `product_stock`, `product_description`, `product_order_delivery`, `product_dine_in`, `product_take_away`, `product_image`, `product_created_at`, `product_updated_at`, `product_status`) VALUES
-(22, 1, 'Anggur Merah', 30000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 16:51:37', '2020-12-20 16:54:58', 1),
-(23, 1, 'Manggo', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 16:55:20', '0000-00-00 00:00:00', 1),
-(24, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 16:55:28', '0000-00-00 00:00:00', 1),
-(25, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:08', '0000-00-00 00:00:00', 1),
-(26, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:09', '0000-00-00 00:00:00', 1),
-(27, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:10', '0000-00-00 00:00:00', 1),
-(28, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:10', '0000-00-00 00:00:00', 1),
-(29, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:11', '0000-00-00 00:00:00', 1),
-(30, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:12', '0000-00-00 00:00:00', 1),
-(31, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:13', '0000-00-00 00:00:00', 1),
-(32, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:13', '0000-00-00 00:00:00', 1),
-(33, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:14', '0000-00-00 00:00:00', 1),
-(34, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:15', '0000-00-00 00:00:00', 1),
-(35, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:15', '0000-00-00 00:00:00', 1),
-(36, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:16', '0000-00-00 00:00:00', 1),
-(37, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:17', '0000-00-00 00:00:00', 1),
-(38, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:17', '0000-00-00 00:00:00', 1),
-(39, 1, 'Orange Juice', 10000, 100, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:18', '0000-00-00 00:00:00', 1);
+(24, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 16:55:28', '0000-00-00 00:00:00', 1),
+(25, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:08', '0000-00-00 00:00:00', 1),
+(26, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:09', '0000-00-00 00:00:00', 1),
+(27, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:10', '0000-00-00 00:00:00', 1),
+(28, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:10', '0000-00-00 00:00:00', 1),
+(29, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:11', '0000-00-00 00:00:00', 1),
+(30, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:12', '0000-00-00 00:00:00', 1),
+(31, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:13', '0000-00-00 00:00:00', 1),
+(32, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:13', '0000-00-00 00:00:00', 1),
+(33, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:14', '0000-00-00 00:00:00', 1),
+(34, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:15', '0000-00-00 00:00:00', 1),
+(35, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:15', '0000-00-00 00:00:00', 1),
+(36, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:16', '0000-00-00 00:00:00', 1),
+(37, 1, 'Orange Juice', 10000, 0, 'Example Description', 0, 1, 1, '', '2020-12-20 17:38:17', '0000-00-00 00:00:00', 1),
+(45, 1, 'Coffe Latte', 50000, 0, 'Coffe latte', 1, 1, 1, '2020-12-30T04-26-50.958Z-web.PNG', '2020-12-30 04:26:50', '0000-00-00 00:00:00', 1),
+(49, 1, 'Coffe Latte', 50000, 0, 'Coffe latte', 1, 1, 1, '2020-12-30T06-08-46.717Z-web.PNG', '2020-12-30 06:08:46', '0000-00-00 00:00:00', 1),
+(50, 1, 'Burung', 50000, 100, 'Coffe latte', 1, 1, 1, '2020-12-30T07-27-45.060Z-wallpaper.jpg', '2020-12-30 07:27:45', '0000-00-00 00:00:00', 1),
+(51, 1, 'Burung aja', 50000, 100, 'Coffe latte', 1, 1, 1, '2020-12-30T07-28-32.274Z-wallpaper.jpg', '2020-12-30 07:28:32', '0000-00-00 00:00:00', 1),
+(52, 1, 'Burung aja', 50000, 100, 'Coffe latte', 1, 1, 1, '2020-12-30T08-04-56.087Z-wallpaper.jpg', '2020-12-30 08:04:56', '0000-00-00 00:00:00', 1),
+(54, 1, 'Burung aja', 50000, 100, 'Coffe latte', 1, 1, 1, '2020-12-30T08-42-48.154Z-wallpaper.jpg', '2020-12-30 08:42:48', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -226,7 +238,12 @@ INSERT INTO `user` (`user_id`, `user_email`, `user_password`, `user_name`, `disp
 (4, 'Hasbialwi73@gmail.com', '$2b$10$jBXebDqBggjZfLt4U9/PYeV16vSXMvUaM347rndI3hIVCCLwAS81e', 'Hasbi Alwi Kusmana', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', '', '1999-10-26', 'male', 1, 1, '2020-12-27 18:56:33', '0000-00-00 00:00:00'),
 (5, 'Hasbialwi74@gmail.com', '$2b$10$iowvhNm28lJ9PT4Zg3ASmOb1yfD0ukyx.XX7jQph80aYBVJ.Xx1mS', 'Hasbi Alwi Kusmana', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 2, 0, '2020-12-27 19:19:29', '0000-00-00 00:00:00'),
 (6, 'Hasbialwi75@gmail.com', '$2b$10$UxAr0TfAkktC.O.9nO5faODQMMMMKMPMs1DpbKWYrDSq9TUm4qlLy', 'Hasbi Alwi Kusmana', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 2, 0, '2020-12-27 19:36:31', '0000-00-00 00:00:00'),
-(7, 'Hasbialwi76@gmail.com', '$2b$10$6L5g01gM0FrZpWtJLhXRp.CDB.1dhhbdJESTQ3FAsjEuoQTr8QyNe', 'Hasbi Alwi Kusmana', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 1, 1, '2020-12-27 19:40:53', '0000-00-00 00:00:00');
+(7, 'Hasbialwi76@gmail.com', '$2b$10$6L5g01gM0FrZpWtJLhXRp.CDB.1dhhbdJESTQ3FAsjEuoQTr8QyNe', 'Hasbi Alwi Kusmana', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 1, 1, '2020-12-27 19:40:53', '0000-00-00 00:00:00'),
+(8, 'mimin@gmail.com', '$2b$10$Kn3QA0md1ysnj0Q4yDYIrO6U1VPkd.M2LDaip4RkYP.0kaLX46vzy', 'mimintamvan', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 1, 1, '2020-12-30 07:10:51', '0000-00-00 00:00:00'),
+(9, 'custumer@gmail.com', '$2b$10$K3B10P67g4qxDspFpkd7MuosP43gS4sT.DgdzhzuwCFu/Ii7fZYLq', 'custumersombong', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 1, 1, '2020-12-30 07:11:42', '0000-00-00 00:00:00'),
+(10, 'custumer1@gmail.com', '$2b$10$z.WIMX238HgPBt1HPJP/S.2q8682PWDJX2mmsSlMt/p80DndBcxDC', 'custumersombong', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 0, 0, '2020-12-30 07:20:07', '0000-00-00 00:00:00'),
+(11, 'custumer2@gmail.com', '$2b$10$uUOhONRaoZzRwa1jRcMRdOTbE4GZaflfJQ2PAuhJzreUcdLX7mBw2', 'custumersombong', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 2, 0, '2020-12-30 07:52:05', '0000-00-00 00:00:00'),
+(12, 'custumer3@gmail.com', '$2b$10$rRMPFj56FJwhbpuzIG28QeOhjuL/dfvAy8y6nqBWgoAJJS7rAHJ92', 'custumersombong', 'Hasbi', '', 'Hasbi', 'Alwi', '089684811299', 'Ciamis', '1999-10-26', 'male', 1, 1, '2020-12-30 08:01:38', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -294,19 +311,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT untuk tabel `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `history_detail`
 --
 ALTER TABLE `history_detail`
-  MODIFY `history_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `history_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `orders`
@@ -318,7 +335,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT untuk tabel `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT untuk tabel `size`
@@ -330,7 +347,7 @@ ALTER TABLE `size`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
