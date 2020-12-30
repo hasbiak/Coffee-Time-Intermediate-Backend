@@ -189,7 +189,7 @@ module.exports = {
         request.body.user_password === ''
       ) {
         setData.user_password = checkId[0].user_password
-      } else if (request.body.user_password == checkId[0].user_password) {
+      } else if (request.body.user_password === checkId[0].user_password) {
         setData.user_password = checkId[0].user_password
       } else {
         const salt = bcrypt.genSaltSync(10)

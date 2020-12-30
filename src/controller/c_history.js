@@ -5,7 +5,6 @@ const {
   deleteHistoryModel
 } = require('../model/m_history')
 const helper = require('../helper/response')
-
 module.exports = {
   getHistory: async (req, res) => {
     try {
@@ -30,27 +29,18 @@ module.exports = {
         user_id,
         history_status
       } = req.body
-      if (
-        history_invoices == null ||
-        history_payment_method == null ||
-        history_subtotal == null ||
-        user_id == null ||
-        history_status == null
-      ) {
-        console.log('All data must be filled in')
-      } else {
-        const setData = {
-          history_id,
-          history_invoices,
-          history_payment_method,
-          history_subtotal,
-          user_id,
-          history_created_at: new Date(),
-          history_status
-        }
-        const result = await postHistoryModel(setData)
-        return helper.response(res, 200, 'Success Post History', result)
+
+      const setData = {
+        history_id,
+        history_invoices,
+        history_payment_method,
+        history_subtotal,
+        user_id,
+        history_created_at: new Date(),
+        history_status
       }
+      const result = await postHistoryModel(setData)
+      return helper.response(res, 200, 'Success Post History', result)
     } catch (error) {
       return helper.response(res, 400, 'Bad Request', error)
     }
@@ -60,20 +50,19 @@ module.exports = {
       console.log(req.body)
       const [
         {
-          history_detail_id,
           product_id,
           history_detail_qty,
+          size,
           history_detail_total,
           history_id
         }
       ] = req.body
       const setData = {
-        history_detail_id,
         product_id,
         history_detail_qty,
+        size,
         history_detail_total,
-        history_id,
-        history_created_at: new Date()
+        history_id
       }
       const result = await postDetailhistoryModel(setData)
       return helper.response(res, 200, 'Success Post Detail History', result)

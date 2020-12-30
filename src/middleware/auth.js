@@ -21,7 +21,7 @@ module.exports = {
       return helper.response(response, 400, 'Please Login First')
     }
   },
-  authorization_: (request, response, next) => {
+  isAdmin: (request, response, next) => {
     let token = request.headers.authorization
     if (token) {
       token = token.split(' ')[1]
@@ -32,7 +32,7 @@ module.exports = {
         ) {
           return helper.response(response, 403, error.message)
         } else {
-          if (result.user_role === 2) {
+          if (result.user_role === 0) {
             return helper.response(response, 400, "You can't access this Path")
           } else {
             request.token = result
