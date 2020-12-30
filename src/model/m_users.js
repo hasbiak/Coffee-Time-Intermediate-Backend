@@ -68,7 +68,7 @@ module.exports = {
   checkUser: (email) => {
     return new Promise((resolve, reject) => {
       connection.query(
-        'SELECT user_id, user_email, user_password, user_name, display_name,user_image, first_name, last_name, user_phone,delivery_address, date_of_birth, user_gender,user_role, user_status FROM user WHERE user_email = ?',
+        'SELECT user_id, user_email, user_password, user_name FROM user WHERE user_email = ?',
         email,
         (error, result) => {
           !error ? resolve(result) : reject(new Error(error))

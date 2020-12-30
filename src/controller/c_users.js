@@ -146,32 +146,11 @@ module.exports = {
     }
     try {
       const { id } = request.params
-      const {
-        user_name,
-        user_password,
-        display_name,
-        user_image,
-        first_name,
-        last_name,
-        user_phone,
-        delivery_address,
-        date_of_birth,
-        user_gender,
-        user_role,
-        user_status
-      } = request.body
+      const { user_name, user_password, user_role, user_status } = request.body
       const checkId = await getUserById(id)
       const setData = {
         user_name,
         user_password,
-        display_name,
-        user_image,
-        first_name,
-        last_name,
-        user_phone,
-        delivery_address,
-        date_of_birth,
-        user_gender,
         user_role,
         user_status,
         user_updated_at: new Date()
